@@ -1,0 +1,7 @@
+SELECT perkara.`perkara_id`, perkara.`nomor_perkara`, 
+perkara_putusan.`tanggal_putusan`, dirput_antrian.`tgl_masuk`, dirput_antrian.`last_tried` 
+FROM perkara_putusan 
+JOIN perkara ON perkara_putusan.`perkara_id`= perkara.`perkara_id`
+JOIN dirput_antrian ON perkara.`perkara_id`= dirput_antrian.`perkara_id`
+WHERE YEAR (tanggal_putusan)='2021' AND MONTH (tanggal_putusan)='02' 
+AND DATE_FORMAT(perkara_putusan.`tanggal_putusan`, "%Y-%m-%d") <> DATE_FORMAT(dirput_antrian.`tgl_masuk`, "%Y-%m-%d")
